@@ -5,7 +5,7 @@ class Config:
 
     def __init__(self, config=None):
         
-        if isinstance(config, ):
+        if isinstance(config, dict):
             for key, value in config.items():
                 setattr(self, key, value)
         elif isinstance(config, str):

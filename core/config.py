@@ -32,6 +32,9 @@ class Config:
     def __repr__(self):
         return json.dumps(self.__dict__, indent=4)
     
+    def __iter__(self):
+        return iter(self.__dict__.items())
+    
     def add(self, key, value):
         if hasattr(self, key):
             raise ValueError(f"Key {key} already exists")

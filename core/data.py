@@ -43,9 +43,5 @@ class Data:
         return self._cache[instrument]
     
     @property
-    def methods(self):
-        return [method for method in dir(self) if callable(getattr(self, method)) and not method.startswith("__")]
-
-    @property
     def instruments(self):
         return [f.split('.')[0] for f in os.listdir(self._data_path) if f.endswith('.csv')]

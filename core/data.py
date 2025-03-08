@@ -18,12 +18,17 @@ class Data:
     def get_prices_from_range(self, instrument, start_date = None, end_date = None):
         df = self.get_raw_prices(instrument)
         
+        df['DATETIME'] = pd.to_datetime(df['DATETIME'], format="%d-%m-%Y %H:%M").dt.date
+        df['DATETIME'] = pd.to_datetime(df['DATETIME'])
+
         if start_date and end_date and pd.to_datetime(start_date) > pd.to_datetime(end_date):
             raise ValueError("Start date must be before end date")
         
         if start_date:
+            start_date = pd.to_datetime(start_date, format="%d-%m-%Y")
             df = df[df['DATETIME'] >= start_date]
         if end_date:
+            end_date = pd.to_datetime(end_date, format="%d-%m-%Y")
             df = df[df['DATETIME'] <= end_date]
         
         return df
@@ -36,7 +41,7 @@ class Data:
             
             df = pd.read_csv(f'{self._data_path}/{instrument}.csv')
             
-            df.set_index(df.columns[0], inplace=True)
+            #df.set_index(df.columns[0], inplace=True)
             
             self._cache[instrument] = df
         

@@ -21,7 +21,7 @@ class Data:
         df['DATETIME'] = pd.to_datetime(df['DATETIME'], format="%d-%m-%Y %H:%M").dt.date
         df['DATETIME'] = pd.to_datetime(df['DATETIME'])
 
-        if start_date and end_date and pd.to_datetime(start_date) > pd.to_datetime(end_date):
+        if start_date and end_date and pd.to_datetime(start_date, dayfirst=True) > pd.to_datetime(end_date, dayfirst=True):
             raise ValueError("Start date must be before end date")
         
         if start_date:

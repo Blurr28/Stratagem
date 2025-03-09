@@ -1,5 +1,5 @@
 import pandas as pd
-from rule import MovingAverageCrossoverRule, VolatilityRule
+from .rules import MovingAverageCrossoverRule, VolatilityRule
 
 class RulesManager:
     RULE_CLASSES = {

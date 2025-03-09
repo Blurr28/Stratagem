@@ -18,6 +18,12 @@ class MovingAverageCrossoverRule(Rule):
         
         return data
     
+    def get_parameters(self):
+        return {
+            "short_window": self.short_window,
+            "long_window": self.long_window
+        }
+
     @classmethod
     def from_config(cls, config: dict):
         return cls(config["short_window"], config["long_window"])

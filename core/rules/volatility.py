@@ -1,4 +1,4 @@
-from base import Rule
+from .base import Rule
 import pandas as pd
 
 class VolatilityRule(Rule):
@@ -10,6 +10,12 @@ class VolatilityRule(Rule):
         data['volatility'] = data["price"].pct_change().rolling(self.window).std()
         data['signal'] = (data['volatility'] > self.threshold).astype(int)
         return data
+
+    def get_parameters(self):
+        return {
+            "window": self.window,
+            "threshold": self.threshold
+        }
 
     @classmethod
     def from_config(cls, config: dict):

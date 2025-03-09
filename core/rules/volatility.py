@@ -10,3 +10,7 @@ class VolatilityRule(Rule):
         data['volatility'] = data["price"].pct_change().rolling(self.window).std()
         data['signal'] = (data['volatility'] > self.threshold).astype(int)
         return data
+
+    @classmethod
+    def from_config(cls, config: dict):
+        return cls(config["window"], config["threshold"])

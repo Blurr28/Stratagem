@@ -17,3 +17,7 @@ class MovingAverageCrossoverRule(Rule):
         data.loc[data['short_mavg'] < data['long_mavg'], 'signal'] = -1
         
         return data
+    
+    @classmethod
+    def from_config(cls, config: dict):
+        return cls(config["short_window"], config["long_window"])

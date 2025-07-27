@@ -1,5 +1,6 @@
 import pandas as pd
-from .rules import MovingAverageCrossoverRule, VolatilityRule
+from rules import MovingAverageCrossoverRule, VolatilityRule
+from system import System
 
 class RulesManager:
     RULE_CLASSES = {
@@ -7,13 +8,16 @@ class RulesManager:
         "Volatility": VolatilityRule
     }
 
-    def __init__(self, config: dict, default_rules: list = None):
-        self.config = config
+    def __init__(self, config: dict = None):
+        if config:
+            self.config = config
 
-        if config.get('rules'):
-            self.rules = self.load_rules_from_config(config)
-        else:
-            self.rules = default_rules if default_rules is not None else []
+            if config.get('rules'):
+                self.rules = self.load_rules_from_config(config)
+        
+    
+    def system_init(self, system: System):
+        self._parent = system
         
     def load_rules_from_config(self, config: dict) -> list :
         rule_instances = []

@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import os
 
+from system import System
+
 class Data:
     def __init__(self, data_path = None):
         if data_path is not None:
